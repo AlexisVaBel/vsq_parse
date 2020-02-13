@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport ScriptLanguage="PascalScript" ScriptText.text="begin&#13;&#10;&#13;&#10;end.&#13;&#10;" Propdata="0844617461736574730E00095661726961626C65730E00" ReportOptions.Name="" ReportOptions.Author="" ReportOptions.Description.text="" ReportOptions.CreateDate="43866.6700946065" ReportOptions.LastChange="43866.6711754514" ReportOptions.VersionMajor="" ReportOptions.VersionMinor="" ReportOptions.VersionRelease="" ReportOptions.VersionBuild="" ReportOptions.Password="">
+<TfrxReportPage Name="Page1" Orientation="poPortrait" PaperWidth="210" PaperHeight="297" PaperSize="-1" LeftMargin="5" RightMargin="5" TopMargin="5" BottomMargin="5" Columns="0" ColumnWidth="0">
+<TfrxReportTitle Name="ReportTitle1" Top="32" Height="20" Columns="1" ColumnWidth="200" ColumnGap="20"/>
+<TfrxPageFooter Name="PageFooter1" Top="748" Height="20" Columns="1" ColumnWidth="200" ColumnGap="20"/>
+<TfrxHeader Name="MasterHeader1" Top="212" Height="36" Columns="1" ColumnWidth="200" ColumnGap="20"/>
+<TfrxMasterData Name="MasterData1" Top="300" Height="20" Columns="1" ColumnWidth="200" ColumnGap="20"/>
+</TfrxReportPage>
+</TfrxReport>
