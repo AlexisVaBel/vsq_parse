@@ -12,7 +12,7 @@
 
 struct VisualProject: public VsqItem{
     void method_empty() override  {
-        std::cout << "VisualProject " << std::endl;
+        std::cout << __FUNCTION__ << " VisualProject " << std::endl;
     }
 };
 

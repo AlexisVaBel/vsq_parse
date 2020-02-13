@@ -13,13 +13,22 @@ void procs_items(const NodeElements *node){
 //    std::cout << node->_info << " " << node->_text << std::endl;
 
     std::istringstream iss(node->_info);
-    std::vector<std::string> vctInfo;
+
     for(std::string strTmp; iss >> strTmp; ){
-        vctInfo.push_back(strTmp);
-        std::cout << strTmp << "|";
-        if(strTmp.)
+
+        if(strTmp.find("class") != std::string::npos){
+
+            auto sz = strTmp.find("\"");
+            auto str2 = strTmp.substr(sz+1, strTmp.length() - sz -2);
+
+            auto itm = VsqItemFactory::instance()->create(str2);
+            if(itm != nullptr)
+                itm.get()->method_empty();
+
+            std::cout << str2  << std::endl;
+        }
     }
-    std::cout << std::endl;
+
 
 
     auto it = node->_setChilds.begin();
