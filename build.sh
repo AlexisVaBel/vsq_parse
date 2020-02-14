@@ -6,5 +6,5 @@ make -j4
 #./00_algs
 #ltrace -e malloc -e free ./allocator > /dev/null
 #valgrind --tool=memcheck ./allocator 
-#valgrind --leak-check=full -v  ./02_xml_parse
-./02_xml_parse
+valgrind --leak-check=full -v  ./02_xml_parse -p ../xml_files/prel.rpp
+#./02_xml_parse -p ../xml_files/sample.fr3

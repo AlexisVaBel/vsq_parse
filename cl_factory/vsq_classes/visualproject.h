@@ -7,13 +7,11 @@
 
 
 #include "vsqitem.h"
-#include "vsqitemsregistrator.h"
 
+#include <iostream>
 
 struct VisualProject: public VsqItem{
-    void method_empty() override  {
-        std::cout << __FUNCTION__ << " VisualProject " << std::endl;
-    }
+    void method_empty() override;
 };
 
 

@@ -3,5 +3,11 @@ project(02_xml_parse)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(02_xml_parse
-        main.cpp xml_procs/xmlreader.h cl_factory/visualproject.h cl_factory/vsqitem.h cl_factory/vsqitemsregistrator.h cl_factory/vsqitemfactory.h cl_factory/visualproject.cpp)
+set(INC_DIRS "." "cl_factory/" "cl_factory/vsq_classes" "xml_procs/")
+set(SRC_LIST main.cpp cl_factory/vsq_classes/emptyitem.cpp cl_factory/vsq_classes/visualproject.cpp vsqconstructor.h vsqconstructor.cpp)
+
+
+include_directories(${INC_DIRS})
+
+add_executable(${PROJECT_NAME} ${SRC_LIST})
+

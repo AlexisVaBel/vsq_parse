@@ -6,8 +6,8 @@
 #include <set>
 #include <vector>
 
-#include <unordered_map>
 #include <chrono>
+#include <memory>
 
 
 struct NodeElements{
@@ -57,7 +57,7 @@ public:
 
         bool    bClosed = false;
 
-        auto t1 = std::chrono::high_resolution_clock::now();
+//        auto t1 = std::chrono::high_resolution_clock::now();
 
         while(pos < sz){
 
@@ -120,16 +120,11 @@ public:
             ++pos;
         }
 
-        auto t2 = std::chrono::high_resolution_clock::now();
-
-
-
-
-
-        auto duration_procs = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-
-
-        std::cout << "char* procs: " << duration_procs << std::endl;
+//        auto t2 = std::chrono::high_resolution_clock::now();
+//        auto duration_procs = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+//
+//
+//        std::cout << "char* procs: " << duration_procs << std::endl;
 
 
 

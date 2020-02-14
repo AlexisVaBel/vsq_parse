@@ -1,87 +1,45 @@
 #include <iostream>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
+#include <getopt.h>
+#include <memory>
+#include "vsqconstructor.h"
 
+static const char *optString = "p:";
+static char * CH_DEFAULT_XML_FILE = "../xml_files/simple.xml";
 
-#include "xml_procs/xmlreader.h"
-#include "cl_factory/vsqitem.h"
-#include "cl_factory/vsqitemfactory.h"
+struct globalArgs_t{
+    char *fullPath;
+} globalArgs;
 
-
-void procs_items(const NodeElements *node){
-    if(node == nullptr)   return;
-//    std::cout << node->_info << " " << node->_text << std::endl;
-
-    std::istringstream iss(node->_info);
-
-    for(std::string strTmp; iss >> strTmp; ){
-
-        if(strTmp.find("class") != std::string::npos){
-
-            auto sz = strTmp.find("\"");
-            auto str2 = strTmp.substr(sz+1, strTmp.length() - sz -2);
-
-            auto itm = VsqItemFactory::instance()->create(str2);
-            if(itm != nullptr)
-                itm.get()->method_empty();
-
-            std::cout << str2  << std::endl;
-        }
-    }
-
-
-
-    auto it = node->_setChilds.begin();
-    while(it != node->_setChilds.end()){
-        procs_items(it->get());
-        ++it;
+void fill_cmd_args(int &opt){
+    switch (opt){
+        case 'p' : globalArgs.fullPath = optarg;
     }
 }
 
+void prepare_args(){
+    globalArgs.fullPath = CH_DEFAULT_XML_FILE;
+}
 
-int main() {
-    XmlReader *parser = new XmlReader();
-
-    std::ifstream istrm("../xml_files/simple.xml", std::ios::binary);
-    if(!istrm.is_open()){
-        std::cout << "failed to open "<< "../xml_files/simple.xml" << std::endl;
-    }else{
-
-        istrm.seekg(0,istrm.end);
-        size_t  lng = istrm.tellg();
-
-        char * buffer = new char[lng];
-
-        size_t  readBytes = 0;
-        while (readBytes < lng){
-            istrm.seekg(readBytes);
-            istrm.read(buffer + readBytes, sizeof(char));
-            readBytes+= sizeof(char);
-        }
-
-
-
-        parser->procs_buffer(buffer, readBytes);
-//        parser->print_nodes();
-
-        std::cout << "Total node counts " << parser->get_nodes_cnt() << std::endl;
-
-        delete[] buffer;
+void read_cmd_conf(int &argc, char ** argv){
+    int opt = 0;
+    prepare_args();
+    do{
+        opt = getopt(argc, argv, optString);
+        fill_cmd_args(opt);
+    }while (opt != -1);
+}
 
 
 
 
-    }
-    istrm.close();
+int main(int argc, char ** argv) {
+    read_cmd_conf(argc, argv);
 
-//    auto itm = VsqItemFactory::instance()->create("visual project");
-//    if(itm != nullptr)
-//        itm.get()->method_empty();
-    procs_items(parser->get_root_node());
+    std::string str = globalArgs.fullPath;
 
-
-
-    delete parser;
+    std::unique_ptr<VsqConstructor> vsq_construct = std::make_unique<VsqConstructor>();
+    if(vsq_construct->process_xml_ok(str))
+        vsq_construct->process_items();
 
     return 0;
 }
